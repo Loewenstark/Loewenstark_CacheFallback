@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <models>          
+            <core>
+                <rewrite>
+                    <cache>Loewenstark_Cache_Model_Core_Cache</cache>
+                </rewrite>
+            </core>
+        </models>
+    </global>
+</config>
