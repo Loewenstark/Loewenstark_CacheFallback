@@ -7,7 +7,6 @@ extends Mage_Core_Model_Cache
     protected $_defaultBackend = 'Cm_Cache_Backend_File';
     protected $_create_cache = false;
 
-
     /**
      * Class constructor. Initialize cache instance based on options
      *
@@ -80,12 +79,25 @@ extends Mage_Core_Model_Cache
     
     /**
      * 
+     * @return string
+     */
+    protected function _getCacheTmpFileName()
+    {
+        return tempnam(Mage::getBaseDir('tmp'), 'loe-fc-');
+    }
+
+
+    /**
+     * 
      * @param array $options
      * @return Loewenstark_Cache_Model_Core_Cache
      */
     protected function _setCacheFileContent($options)
     {
-        file_put_contents($this->_getCacheFileName(), json_encode($options));
+        $tmpName = $this->_getCacheTmpFileName();
+        $name = $this->_getCacheFileName();
+        file_put_contents($tmpName, json_encode($options));
+        @rename($tmpName, $name);
         return $this;
     }
 
