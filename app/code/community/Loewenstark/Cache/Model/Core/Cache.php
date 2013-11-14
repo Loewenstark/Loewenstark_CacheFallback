@@ -6,6 +6,7 @@ extends Mage_Core_Model_Cache
     
     protected $_defaultBackend = 'Cm_Cache_Backend_File';
     protected $_create_cache = false;
+    protected $_debug = false;
 
     /**
      * Class constructor. Initialize cache instance based on options
@@ -34,6 +35,10 @@ extends Mage_Core_Model_Cache
             $this->_getParentConstruct($options);
         } catch(Exception $e)
         {
+            if($this->_debug)
+            {
+                file_put_contents(Mage::getBaseDir('log').DS.'cache.log', "####".date('r')."####\n".print_r($options, true)."\n".$e->getMessage()."\n".$e->getTraceAsString()."\n", FILE_APPEND);
+            }
             $this->_create_cache = true;
             $this->_removeCacheFile();
             if(isset($options['fallback']))
@@ -65,7 +70,7 @@ extends Mage_Core_Model_Cache
      */
     protected function _getCacheConfig($fallback = 'cache')
     {
-        return (array)Mage::app()->getConfig()->getNode('global/'.$fallback);
+        return (array)json_decode(json_encode(Mage::app()->getConfig()->getNode('global/'.$fallback)), true); // convert to array
     }
 
     /**
@@ -85,7 +90,6 @@ extends Mage_Core_Model_Cache
     {
         return tempnam(Mage::getBaseDir('tmp'), 'loe-fc-');
     }
-
 
     /**
      * 
