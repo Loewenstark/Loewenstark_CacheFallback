@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
+<!--
+/**
+  * Loewenstark_Cache
+  *
+  * @category  Loewenstark
+  * @package   Loewenstark_Cache
+  * @author    Mathis Klooss <m.klooss@loewenstark.com>
+  * @copyright 2013 Loewenstark Web-Solution GmbH (http://www.mage-profis.de/). All rights served.
+  * @license   https://github.com/mklooss/Loewenstark_Cache/blob/master/README.md
+  */
+//-->
 <config>
     <global>
-        <models>          
+        <models>
             <core>
                 <rewrite>
                     <cache>Loewenstark_Cache_Model_Core_Cache</cache>

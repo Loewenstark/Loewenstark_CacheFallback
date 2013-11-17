@@ -1,12 +1,20 @@
 <?php
-
+/**
+  * Loewenstark_Cache
+  *
+  * @category  Loewenstark
+  * @package   Loewenstark_Cache
+  * @author    Mathis Klooss <m.klooss@loewenstark.com>
+  * @copyright 2013 Loewenstark Web-Solution GmbH (http://www.mage-profis.de/). All rights served.
+  * @license   https://github.com/mklooss/Loewenstark_Cache/blob/master/README.md
+  */
 class Loewenstark_Cache_Model_Core_Cache
 extends Mage_Core_Model_Cache
 {
-    
+    /** @var string Default Cache Backend */
     protected $_defaultBackend = 'Cm_Cache_Backend_File';
+    /** @var bool Create Cache file */
     protected $_create_cache = false;
-    protected $_debug = false;
 
     /**
      * Class constructor. Initialize cache instance based on options
@@ -19,7 +27,7 @@ extends Mage_Core_Model_Cache
     }
     
     /**
-     * Mage_Core_Model_Cache::__construct
+     * will check if cache is possible, if not will choose the fallback
      * 
      * @param array $options
      */
@@ -35,10 +43,6 @@ extends Mage_Core_Model_Cache
             $this->_getParentConstruct($options);
         } catch(Exception $e)
         {
-            if($this->_debug)
-            {
-                file_put_contents(Mage::getBaseDir('log').DS.'cache.log', "####".date('r')."####\n".print_r($options, true)."\n".$e->getMessage()."\n".$e->getTraceAsString()."\n", FILE_APPEND);
-            }
             $this->_create_cache = true;
             $this->_removeCacheFile();
             if(isset($options['fallback']))
@@ -51,6 +55,8 @@ extends Mage_Core_Model_Cache
     }
     
     /**
+     * Mage_Core_Model_Cache::__construct
+     * start cache interface
      * 
      * @param array $options
      */
@@ -65,6 +71,7 @@ extends Mage_Core_Model_Cache
 
 
     /**
+     * get Cache Configurations
      * 
      * @return array
      */
@@ -74,6 +81,7 @@ extends Mage_Core_Model_Cache
     }
 
     /**
+     * get Cache Json Filename
      * 
      * @return string
      */
@@ -83,6 +91,7 @@ extends Mage_Core_Model_Cache
     }
     
     /**
+     * get Temp Filename for self::_getCacheFileName
      * 
      * @return string
      */
@@ -92,6 +101,7 @@ extends Mage_Core_Model_Cache
     }
 
     /**
+     * write cache config file
      * 
      * @param array $options
      * @return Loewenstark_Cache_Model_Core_Cache
@@ -106,6 +116,7 @@ extends Mage_Core_Model_Cache
     }
 
     /**
+     * get Configuration from Cache file
      * 
      * @return array
      */
@@ -122,6 +133,7 @@ extends Mage_Core_Model_Cache
     }
     
     /**
+     * remove Json File
      * 
      * @return Loewenstark_Cache_Model_Core_Cache
      */

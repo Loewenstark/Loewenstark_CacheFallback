@@ -1,0 +1,10 @@
+{
+   "name": "loewenstark/cache",
+   "type": "magento-module",
+   "description": "Cache fallback",
+   "homepage": "https://github.com/mklooss/Loewenstark_Cache",
+   "require": {
+      "magento-hackathon/magento-composer-installer": "*",
+      "colinmollenhour/cache-backend-file": "*"
+   }
+}
