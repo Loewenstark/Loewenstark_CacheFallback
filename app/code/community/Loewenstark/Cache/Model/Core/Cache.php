@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.DS.'functions.php';
 /**
   * Loewenstark_Cache
   *
