@@ -67,6 +67,16 @@ extends Mage_Core_Model_Cache
         {
             $this->_setCacheFileContent($options);
         }
+        // check redis and compression lib
+        if(isset($options['backend']) && $options['backend'] == 'Cm_Cache_Backend_Redis'
+            && isset($options['backend_options']['compression_lib']) && $options['backend_options']['compression_lib'] == 'l4z')
+        {
+            $prefix = 'PH';
+            if (defined('HHVM_VERSION')) {
+                $prefix = 'HH';
+            }
+            $options['prefix'] = $prefix . $options['prefix'];
+        }
         parent::__construct($options);
     }
 
