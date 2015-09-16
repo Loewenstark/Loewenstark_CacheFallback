@@ -119,7 +119,7 @@ extends Cm_Cache_Backend_Redis
         {
             foreach ($tags as $_tag)
             {
-                $id = $this->_getId($id);
+                $id = $this->_getId($_tag);
                 foreach ($this->_getPrefixTypes() as $_type)
                 {
                     if (!in_array($_type.$id, $tags))
