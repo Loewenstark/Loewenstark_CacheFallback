@@ -75,7 +75,7 @@ extends Mage_Core_Model_Cache
             if (defined('HHVM_VERSION')) {
                 $prefix = 'HH';
             }
-            $options['prefix'] = $prefix . $options['prefix'];
+            $options['prefix'] = $prefix . (isset($options['prefix']) ? $options['prefix'] : '');
         }
         parent::__construct($options);
     }
